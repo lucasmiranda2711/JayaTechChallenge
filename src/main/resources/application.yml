@@ -1,0 +1,19 @@
+rest:
+  access_key: ENC(EvTzx2AV1/4/vHNuP1mtxU829WFZ4nvrcTtoRMXU/INyR+F/84l/53ghKnbjH1+h)
+
+spring:
+  data:
+    mongodb:
+      password: ENC(Ujb0oRl7T6wxogCO0I+KyI1BEmxQ9DMt)
+      uri: mongodb+srv://currencyuser:${spring.data.mongodb.password}@cluster0.dr5hv.mongodb.net/db?retryWrites=true&w=majority
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
+
+jasypt:
+  encryptor:
+    algorithm: PBEWithMD5AndDES
+    iv-generator-classname: org.jasypt.iv.NoIvGenerator

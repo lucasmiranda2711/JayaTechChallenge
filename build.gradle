@@ -1,0 +1,43 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.1'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+}
+
+group = 'com.jaya'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+jar {
+	enabled = false
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation "io.springfox:springfox-boot-starter:3.0.0"
+	implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter', version: '3.0.3'
+	implementation("com.playtika.reactivefeign:feign-reactor-core:3.0.3")
+	implementation("com.playtika.reactivefeign:feign-reactor-spring-configuration:3.0.3")
+	implementation("com.playtika.reactivefeign:feign-reactor-webclient:3.0.3")
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.1'
+	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+	useJUnitPlatform()
+}
