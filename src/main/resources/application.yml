@@ -1,0 +1,13 @@
+rest:
+  access_key: b0db2e75b072cc9a08575cdd42772c77
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://root:root@localhost:27017/db?authSource=admin
+
+feign:
+  client:
+    config:
+      default:
+        loggerLevel: basic
