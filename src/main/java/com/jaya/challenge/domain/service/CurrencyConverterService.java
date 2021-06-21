@@ -6,6 +6,7 @@ import com.jaya.challenge.dto.CurrencyRequestDto;
 import com.jaya.challenge.rest.CurrencyExchangeClient;
 import com.jaya.challenge.rest.config.RestConfiguration;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -22,11 +23,12 @@ public class CurrencyConverterService {
         this.restConfiguration = restConfiguration;
     }
 
-    public Mono<CurrencyApiResponseDto> convertCurrency(CurrencyRequestDto currencyRequestDto){
+    @Cacheable(cacheNames = {"exchangeapi"})
+    public Mono<CurrencyApiResponseDto> convertCurrency(String origin, String destination){  //origin is not currently being used
         log.info("Starting to convert currency");
         CurrencyApiRequestDto currencyApiRequestDto = CurrencyApiRequestDto.builder()
                 .access_key(restConfiguration.getAccess_key())
-                .symbols(currencyRequestDto.getCurrencyDestination().name())
+                .symbols(destination)
                 .build();
         return currencyExchangeClient.getCurrencies(currencyApiRequestDto);
     }

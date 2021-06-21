@@ -30,6 +30,8 @@ dependencies {
 	implementation("com.playtika.reactivefeign:feign-reactor-core:3.0.3")
 	implementation("com.playtika.reactivefeign:feign-reactor-spring-configuration:3.0.3")
 	implementation("com.playtika.reactivefeign:feign-reactor-webclient:3.0.3")
+	implementation group: 'com.github.ben-manes.caffeine', name: 'caffeine', version: '3.0.2'
+	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.5.1'
 	implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.1'
 	implementation group: 'com.github.ulisesbocchio', name: 'jasypt-spring-boot-starter', version: '3.0.3'
 	compileOnly 'org.projectlombok:lombok'

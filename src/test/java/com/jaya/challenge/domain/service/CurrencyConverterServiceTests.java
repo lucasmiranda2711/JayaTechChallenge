@@ -25,7 +25,9 @@ class CurrencyConverterServiceTests {
         CurrencyConverterService currencyConverterService =
                 new CurrencyConverterService(mockedRequestClient, restConfiguration);
 
-        var response = currencyConverterService.convertCurrency(mockedCurrencyRequest);
+        var response = currencyConverterService
+                .convertCurrency(mockedCurrencyRequest.getCurrencyOrigin().name(),
+                        mockedCurrencyRequest.getCurrencyDestination().name());
 
         assertEquals(mockedApiResponse, response);
 
