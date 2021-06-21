@@ -30,7 +30,8 @@ public class CurrencyConverterApplicationService {
     }
 
     public Mono<CurrencyResponseDto> convertCurrency(CurrencyRequestDto currencyRequestDto){
-       return currencyConverterService.convertCurrency(currencyRequestDto)
+       return currencyConverterService.convertCurrency(currencyRequestDto.getCurrencyOrigin().name(),
+               currencyRequestDto.getCurrencyDestination().name())
                .flatMap(convertedCurrency-> save(currencyRequestDto, convertedCurrency))
                .map(this::currencyRequestToCurrencyResponseDtoMap);
     }
