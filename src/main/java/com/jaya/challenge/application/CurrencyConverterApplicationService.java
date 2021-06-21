@@ -7,6 +7,7 @@ import com.jaya.challenge.dto.CurrencyRequestDto;
 import com.jaya.challenge.dto.CurrencyResponseDto;
 import com.jaya.challenge.enums.CurrencyType;
 import com.jaya.challenge.repository.CurrencyRequestRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,6 +16,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 @Service
+@Slf4j
 public class CurrencyConverterApplicationService {
 
     private final CurrencyConverterService currencyConverterService;
@@ -34,6 +36,7 @@ public class CurrencyConverterApplicationService {
     }
 
     private Mono<CurrencyRequest> save(CurrencyRequestDto currencyRequestDto, CurrencyApiResponseDto convertedCurrency) {
+        log.info("Saving data.");
         return currencyRequestRepository.save(CurrencyRequest.builder()
                 .currencyOrigin(currencyRequestDto.getCurrencyOrigin().name())
                 .currencyDestination(currencyRequestDto.getCurrencyDestination().name())
@@ -45,10 +48,12 @@ public class CurrencyConverterApplicationService {
     }
 
     public Flux<CurrencyResponseDto> findAll() {
+        log.info("Finding all currency requests.");
         return  currencyRequestRepository.findAll().map(this::currencyRequestToCurrencyResponseDtoMap);
     }
 
     private CurrencyResponseDto currencyRequestToCurrencyResponseDtoMap(CurrencyRequest currencyRequest){
+        log.info("Mapping data to response.");
         return CurrencyResponseDto.builder()
                 .transactionId(currencyRequest.getTransactionId())
                 .currencyOrigin(CurrencyType.valueOf(currencyRequest.getCurrencyOrigin()))
